@@ -1,5 +1,6 @@
 from flask import Flask,request, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 import MySQLdb
 import pickle
 import numpy as np
@@ -14,6 +15,9 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/diseases'
 db=SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 class Symptom(db.Model):
     __tablename__ = 'symptom'
@@ -31,11 +35,15 @@ model=pickle.load(open('model/model.pkl','rb'))
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route("/index")
 def index():
     return render_template('index.html')
+
+@app.route("/login")
+def login():
+    return render_template('login.html')
 
 @app.route("/aboutUs")
 def aboutUs():
