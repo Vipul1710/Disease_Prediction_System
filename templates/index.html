@@ -2,14 +2,16 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet" type="text/css" >
-  <script src="{{ url_for('static', filename='styles/index.js') }}"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <title>DPS | Home</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+  <script src="{{ url_for('static', filename='styles/index.js') }}" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -21,15 +23,15 @@
     <!-- mid box for navbar -->
     <div class="right">
         <ul class="navbar">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="hello_world" class="active">Home</a></li>
+            <li><a href="aboutUs">About Us</a></li>
             <li><a href="#">Dashboard</a></li>
             <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Administration
               <span class="caret"></span></button>
               <ul class="dropdown-menu">
                 <li><a href="#">Diseases Dataset</a></li>
-                <li><a href="#">All Diseases</a></li>
+                <li><a href="allDiseases">All Diseases</a></li>
                 <li><a href='predict'>Predict Disease</a></li>
               </ul>
             </div>
@@ -37,13 +39,25 @@
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
-    
+
 </header>
 
-<div class="container">
-  <img src='{{url_for('static',filename='bac.jpg')}}' alt="error">
+<div id="carouselExampleSlidesOnly" class="contImg carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{{url_for('static',filename='images/img1.jpg')}}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{{url_for('static',filename='images/img2.jpg')}}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{{url_for('static',filename='images/img3.jpg')}}" alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{{url_for('static',filename='images/img4.jpg')}}" alt="Fourth slide">
+    </div>
+  </div>
 </div>
-  
 
 </body>
 </html>

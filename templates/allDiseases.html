@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Diseases</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/allDiseases.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- left for logo -->
+        <div class="left">
+            <div>Diseases Prediction System</div>
+        </div>
+        <!-- mid box for navbar -->
+        <div class="right">
+            <ul class="navbar">
+                <li><a href="hello_world" >Home</a></li>
+                <li><a href="aboutUs">About Us</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Administration
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Diseases Dataset</a></li>
+                    <li><a href="allDiseases" class="active">All Diseases</a></li>
+                    <li><a href='predict'>Predict Disease</a></li>
+                  </ul>
+                </div>
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    
+    </header>
+    {%for di in diseases%}
+    <div class="box">
+        {{ di.name }}
+    </div>
+    {% endfor %}
+</body>
+</html>

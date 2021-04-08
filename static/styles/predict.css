@@ -2,16 +2,18 @@ h3{
   text-align: center;
   background-color: rgb(41, 41, 83);
   color: white;
+  height: 50px;
 }
+
 .heading{
-  width:80%;
+  width:90%;
   height: 30px;
   background-color: rgb(41, 41, 83);
   margin: auto;
   text-align: center;
-  
   color: white;
 }
+
 .box{
   margin: 20px auto;
   font-size: 20px;
@@ -19,22 +21,25 @@ h3{
   align-items: center;
   text-align: center;
 }
+
 .form-group{
   width: 100%;
   margin: 50px auto;
 }
+
 .ans{
   width: 60%;
   margin: 10px auto;
   text-align: center;
 }
-.btn1{
 
+.btn1{
   width: 10%;
   margin: 5px auto;
+  margin-bottom: 30px;
 }
 
-.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-  color: black;
-  background-color: white;
+.btn2{
+  width: 10%;
+  margin: 5px auto;
 }

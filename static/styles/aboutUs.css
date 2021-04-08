@@ -2,3 +2,6 @@ body{
     /* background:url({{'static', filename='images/background.jpg'}} ); */
      background-image:"{{ url_for('static', filename='images/background.jpg') }}";
 }
+h1{
+    text-align: center;
+}

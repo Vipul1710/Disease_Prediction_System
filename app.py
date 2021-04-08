@@ -5,12 +5,13 @@ import pickle
 import numpy as np
 import os
 
-TEMPLATE_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/templates')
-STATIC_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/static')
+#TEMPLATE_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/templates')
+#STATIC_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/static')
 #TEMPLATE_DIR = os.path.abspath('G:/Pure Website Course/EDI/templates')
 #STATIC_DIR = os.path.abspath('G:/Pure Website Course/EDI/static')
 
-app = Flask(__name__,template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
+#app = Flask(__name__,template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/diseases'
 db=SQLAlchemy(app)
 
@@ -20,14 +21,30 @@ class Symptom(db.Model):
     name = db.Column(db.String(80), nullable=False)
     value = db.Column(db.Integer,  nullable=False)
 
+class Diseases(db.Model):
+    __tablename__ = 'disease_name'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
 
-model=pickle.load(open('G:/Third year/SEM2/EDI_6/Disease-Prediction-from-Symptoms-master/saved_model/model.pkl','rb'))
+model=pickle.load(open('model/model.pkl','rb'))
 
 
 @app.route('/')
 def hello_world():
     return render_template('index.html')
 
+@app.route("/index")
+def index():
+    return render_template('index.html')
+
+@app.route("/aboutUs")
+def aboutUs():
+    return render_template('aboutUs.html')
+
+@app.route("/allDiseases")
+def allDiseases():
+    dise = Diseases.query.order_by(Diseases.name).all()
+    return render_template('allDiseases.html',diseases=dise)
 
 @app.route("/predict")
 def predict():
