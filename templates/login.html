@@ -1,23 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="form-group">
-        <form action='/predict1'  method="post" >
-            <div class="box" id="sel1">
-              <label for="uname">Username</label>
-              <input type="text" name="username" id="uname">
-            </div> 
-            <div>
-                <label for="pass">Password</label>
-                <input type="password" name="password" id="pass">
-            </div>
-            <button type="submit">Submit</button>
-         </form>
-    </div>         
-</body>
+<!-- Store this code in 'login.html' file inside the 'templates' folder -->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Login </title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles/ register.css') }}">		
+	</head>
+	<body></br></br></br></br></br>
+		<div align="center">
+		<div align="center" class="border">
+			<div class="header">
+				<h1 class="word">Login</h1>
+			</div></br></br></br>
+			<h2 class="word">
+				<form action="/login" method="post">
+				<div class="msg">{{ msg }}</div>
+					<input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
+					<input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br></br>
+					<input type="submit" class="btn" value="Sign In"></br></br>
+				</form>
+			</h2>
+			<p class="bottom">Dont't have an account? <a class="bottom" href='/register'> Sign Up here</a></p>
+		</div>
+		</div>
+	</body>
 </html>
