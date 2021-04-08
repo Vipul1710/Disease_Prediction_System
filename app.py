@@ -60,9 +60,12 @@ model=pickle.load(open('model/model.pkl','rb'))
 def hello_world():
     return render_template('login.html')
 
-@app.route('/login',methods=['POST','GET'])
+@app.route('/loginpage',methods=['POST','GET'])
+def loginpage():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    render_template('login.html')
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
