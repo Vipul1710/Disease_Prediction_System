@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Symptom Prediction</title>
+
+      
+      <link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet" type="text/css" >
+      
+      <link href="{{ url_for('static', filename='styles/predict.css') }}" rel="stylesheet" type="text/css" >
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+     <header>
+      
+      <div class="left">
+          <div>Diseases Prediction System</div>
+      </div>
+      
+      <div class="right">
+          <ul class="navbar">
+              <li><a href="#" >Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle ,active" type="button" data-toggle="dropdown">My Administration
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Diseases Dataset</a></li>
+                  <li><a href="#">All Diseases</a></li>
+                  <li><a href='predict' >Predict Disease</a></li>
+                </ul>
+              </div>
+              <li><a href="#">My Account</a></li>
+              <li><a href="#">Logout</a></li>
+          </ul>
+      </div>
+      
+  </header> 
+    <div class="heading">
+      <h3>Please Enter Your Observed Symptoms</h3>
+    </div>
+      
+      <div class="form-group">
+ 
+    <form action='/predict1'  method="post" >
+        <div class="box">
+          <label for="sel1">Symptom 1 : </label>
+          <select class="form-control" name="s1" id="sel1">
+            	<option>Select Symptom</option>
+			            {% for sym in syms %}
+			        <option >	{{ sym.name }}  </option>	
+			            {% endfor %}
+          </select>
+        </div>
+
+        <div class="box">
+          <label for="sel1">Symptom 2 : </label>
+          <select class="form-control" name="s2" id="sel2">
+              <option>Select Symptom</option>
+                  {% for sym in syms %}
+			        <option >  {{ sym.name }}  </option>	
+			            {% endfor %}
+          </select>
+        </div>
+
+        <div class="box">
+          <label for="sel1">Symptom 3 : </label>
+          <select class="form-control" name="s3" id="sel3">
+              <option>Select Symptom</option>
+                {% for sym in syms %}
+			        <option >	 {{ sym.name }}  </option>	
+			            {% endfor %}
+          </select>
+        </div>
+
+
+        <div class="box">
+          <label for="sel1">Symptom 4 : </label>
+          <select class="form-control" name="s4" id="sel4">
+              <option>Select Symptom</option> 
+                  {% for sym in syms %}
+			        <option >	{{ sym.name }} </option>	
+			            {% endfor %}
+          </select>
+        </div>
+
+	      <div class="btn1">
+          <button type="submit" >Predict Diseases</button>
+        </div>
+    </form>
+    <br> 
+    
+    <div class="ans">
+      {{pred}}
+    </div>   
+    
+    <br>
+    </div>
+
+  </body>
+</html>
