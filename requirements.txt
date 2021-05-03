@@ -1,6 +1,6 @@
 flask
 flask_sqlalchemy
 pickleshare
-numpy
+numpy==1.16.4
 os
 re
