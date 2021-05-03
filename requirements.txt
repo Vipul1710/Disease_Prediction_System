@@ -1,0 +1,6 @@
+flask
+flask_sqlalchemy
+pickle
+numpy
+os
+re
