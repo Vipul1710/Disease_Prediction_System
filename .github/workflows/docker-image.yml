@@ -20,6 +20,6 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: docker  login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name : Build the Docker image
-      run: docker  build . --file Dockerfile.txt--tag vipul17/sample_1:latest
+      run: docker build -t "vipul17/sample_1:latest" . --file Dockerfile.txt
     - name : Docker Push
       run : docker push ${{secrets.DOCKER_USER}}/sample_1
