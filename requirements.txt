@@ -2,5 +2,4 @@ flask
 flask_sqlalchemy
 pickleshare
 numpy==1.16.4
-os
-re
+re==2.22.0
