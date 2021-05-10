@@ -1,11 +1,5 @@
 from flask import Flask,request, url_for, redirect, render_template,session
-#from flask.ext.session import Session
-#import Flask_SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
-from flask_login import LoginManager
-import MySQLdb
 import pickle
 import numpy as np
 import os
