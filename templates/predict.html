@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +7,7 @@
 
 
       <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='styles/predict.css') }}">
+      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/predict.css') }}"> -->
       
 
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,36 +19,48 @@
   <body>
      <header>
 
-      <div class="left">
-          <div>Diseases Prediction System</div>
-      </div>
-
-      <div class="right">
-          <ul class="navbar">
-              <li><a href="index" >Home</a></li>
-              <li><a href="aboutUs">About Us</a></li>
-              <li><a href="#">Dashboard</a></li>
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle ,active" type="button" data-toggle="dropdown">My Administration
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Diseases Dataset</a></li>
-                  <li><a href="allDiseases">All Diseases</a></li>
-                  <li><a href="predict">Predict Disease</a></li>
-                </ul>
-              </div>
-              <li><a href="#">My Account</a></li>
-              <li><a href="logout">Logout</a></li>
-          </ul>
-      </div>
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
+            <div class="float-left pr-name h4">
+              Diseases Prediction System 
+            </div>
+            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
+              <ul class="navbar-nav nav-items">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="aboutUs">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    My Administration
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Diseases Dataset</a>
+                    <a class="dropdown-item" href="allDiseases">All Diseases</a>
+                    <a class="dropdown-item" href="predict">Predict Disease</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Account</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                  </li>
+              </ul>
+            </div>
+          </nav>
   </header>
-    <div class="heading">
+
+    <div class="text-center text-primary mt-5 h3">
       <h3>Please Enter Your Observed Symptoms</h3>
     </div>
 
-    <div class="form-group">
-      <form action='/predict1'  method="post" >
+    <div class="form-group container">
+      <form action='/predict1'  method="post">
           <div class="box" id="sel1">
             <label>Symptom 1 : </label>
             <select class="form-control" name="s1">
@@ -59,23 +70,14 @@
   			            {% endfor %}
             </select>
           </div>
-
-          <div class="new">
-
-          </div>
-
-          <div class="btn1">
-            <button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Add Symptom</button>
-          </div>
-
-          <div class="btn2">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-clipboard-list"></i> Predict Disease</button>
-          </div>
+          <div class="container">
+            <div class="mt-4">
+                <button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Add Symptom</button>
+                <button class="btn btn-primary ml-4" type="submit"><i class="fas fa-clipboard-list"></i> Predict Disease</button>
+            </div>
+        </div>
         </form>
-
-        <br>
-
-        <div class="ans">
+        <div class="container mt-5">
           {{pred}}
         </div>
 

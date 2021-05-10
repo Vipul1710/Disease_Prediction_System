@@ -1,6 +1,6 @@
 from flask import Flask,request, url_for, redirect, render_template,session
 #from flask.ext.session import Session
-
+#import Flask_SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
@@ -11,19 +11,14 @@ import numpy as np
 import os
 import re
 
-#TEMPLATE_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/templates')
-#STATIC_DIR = os.path.abspath('C:/Users/DELL/PycharmProjects/Real_DeepLearning/venv/EDI/static')
-#TEMPLATE_DIR = os.path.abspath('G:/Pure Website Course/EDI/templates')
-#STATIC_DIR = os.path.abspath('G:/Pure Website Course/EDI/static')
 
-#app = Flask(__name__,template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
 app = Flask(__name__)
-#from flask.ext.session import Session
+
 
 SESSION_TYPE = 'memcache'
 
-#sess = Session()
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/diseases'
 db=SQLAlchemy(app)

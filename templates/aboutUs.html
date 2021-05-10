@@ -3,59 +3,94 @@
   <head>
     <meta charset="utf-8">
     <title>DPS | About The Developers</title>
-
     <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
-    <link rel="stylesheet" href="{{url_for('static',filename='styles/aboutUs.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body >
-    <header style="height: 70px;">
+    <header>
       <!-- left for logo -->
-      <div class="left">
-          <div>Diseases Prediction System</div>
-      </div>
-      <!-- mid box for navbar -->
-      <div class="right">
-          <ul class="navbar">
-              <li><a href="index" class="active">Home</a></li>
-              <li><a href="aboutUs">About Us</a></li>
-              <li><a href="#">Dashboard</a></li>
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Administration
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Diseases Dataset</a></li>
-                  <li><a href="allDiseases">All Diseases</a></li>
-                  <li><a href='predict'>Predict Disease</a></li>
-                </ul>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
+        <div class="float-left pr-name h3">
+          Diseases Prediction System 
+        </div>
+        <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
+          <ul class="navbar-nav nav-items">
+            <li class="nav-item active">
+              <a class="nav-link" href="index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aboutUs">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                My Administration
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Diseases Dataset</a>
+                <a class="dropdown-item" href="allDiseases">All Diseases</a>
+                <a class="dropdown-item" href="predict">Predict Disease</a>
               </div>
-              <li><a href="#">My Account</a></li>
-              <li><a href="logout">Logout</a></li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="logout">Logout</a>
+              </li>
           </ul>
-      </div>
+        </div>
+      </nav>
 
   </header>
 
-    <h1>Developer's Details</h1>
+<div class="h3 text-center text-primary mt-5">
+      Developer's Details
+</div>
 
-    <h2>Amaan Baig</h2>
-    <p>&emsp; Roll No. : 21</p>
-    <p>&emsp; Gr. No. : </p>
-    <p>&emsp; College : Vishwakarma Institute of Technology, PUNE</p>
-    <h2>Sahil Bhende</h2>
-    <p>&emsp; Roll No. : 32</p>
-    <p>&emsp; Gr. No. : </p>
-    <p>&emsp; College : Vishwakarma Institute of Technology, PUNE</p>
-    <h2>Salas Dongaonkar</h2>
-    <p>&emsp; Roll No. : 67</p>
-    <p>&emsp; Gr. No. : 11810429</p>
-    <p>&emsp; College : Vishwakarma Institute of Technology, PUNE</p>
-    <h2>Vipul Doshi</h2>
-    <p>&emsp; Roll No. : 69</p>
-    <p>&emsp; Gr. No. : </p>
-    <p>&emsp; College : Vishwakarma Institute of Technology, PUNE</p>
+
+    <table class="table table-striped container mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Sr. No.</th>
+            <th scope="col">Roll No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">College</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>21</td>
+            <td>Amaan Baig</td>
+            <td>Vishwakarma Institute of Technology, PUNE</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>32</td>
+            <td>Sahil Bhende</td>
+            <td>Vishwakarma Institute of Technology, PUNE</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td> 67</td>
+            <td>Salas Dongaonkar</td>
+            <td>Vishwakarma Institute of Technology, PUNE</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>69</td>
+            <td>Vipul Doshi</td>
+            <td>Vishwakarma Institute of Technology, PUNE</td>
+          </tr>
+        </tbody>
+      </table>
+
+
   </body>
 </html>
