@@ -1,5 +1,7 @@
 from flask import Flask,request, url_for, redirect, render_template,session
 from flask_sqlalchemy import SQLAlchemy
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
 import pickle
 import numpy as np
 import os
@@ -8,7 +10,7 @@ import re
 
 
 app = Flask(__name__)
-
+GoogleMaps(app, key="8JZ7i18MjFuM35dJHq70n3Hx4")
 
 SESSION_TYPE = 'memcache'
 
@@ -34,13 +36,19 @@ class Account(db.Model):
     __tablename__ = 'account'
     id=db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(255), nullable=False)
     email=db.Column(db.String(100),nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+    contact_no=db.Column(db.String(10),nullable=False)
+    state = db.Column(db.String(10), nullable=False)
+    city = db.Column(db.String(10), nullable=False)
 
-    def __init__(self, username=None, password=None,email=None):
+    def __init__(self, username=None, password=None,email=None,contact_no=None,state=None,city=None):
         self.username = username
         self.password = password
         self.email=email
+        self.contact_no=contact_no
+        self.state=state
+        self.city=city
 
 model=pickle.load(open('model/model.pkl','rb'))
 
@@ -86,10 +94,13 @@ def register():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
         username = request.form['username']
-        password = request.form['password']
         email = request.form['email']
+        password = request.form['password']
+        contact_no = request.form['contact']
+        state = request.form['state']
+        city = request.form['city']
 
-        details=Account( username,password,email)
+        details=Account( username,password,email,contact_no,state,city)
         account = Account.query.filter_by(username=username).first()
         if account:
             msg = 'Account already exists !'
@@ -103,6 +114,7 @@ def register():
             db.session.add(details)
             db.session.commit()
             msg = 'You have successfully registered !'
+            return render_template('login.html', msg=msg)
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('register.html', msg = msg)
@@ -141,6 +153,35 @@ def predict1():
     print(prediction)
     return render_template('predict.html',pred='Your Diseases is {}'.format(prediction[0]))
 
+@app.route("/map")
+def map():
+    # creating a map in the view
+    mymap = Map(
+        identifier="view-side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    sndmap = Map(
+        identifier="sndmap",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+             'lat': 37.4419,
+             'lng': -122.1419,
+             'infobox': "<b>Hello World</b>"
+          },
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+             'lat': 37.4300,
+             'lng': -122.1400,
+             'infobox': "<b>Hello World from other place</b>"
+          }
+        ]
+    )
+    return render_template('map.html', mymap=mymap, sndmap=sndmap)
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

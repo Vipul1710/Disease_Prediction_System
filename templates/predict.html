@@ -1,90 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>DPS | Predict Disease</title>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPS | Predict Disease</title>
 
 
-      <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
-      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/predict.css') }}"> -->
-      
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/predict.css') }}"> -->
 
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
-  </head>
 
-  <body>
-     <header>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
+</head>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
-            <div class="float-left pr-name h4">
-              Diseases Prediction System 
+<body>
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
+      <div class="float-left pr-name h4">
+        Diseases Prediction System
+      </div>
+      <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
+        <ul class="navbar-nav nav-items">
+          <li class="nav-item active">
+            <a class="nav-link" href="index">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="mapview">Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aboutUs">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="true">
+              My Administration
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Diseases Dataset</a>
+              <a class="dropdown-item" href="allDiseases">All Diseases</a>
+              <a class="dropdown-item" href="predict">Predict Disease</a>
             </div>
-            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
-              <ul class="navbar-nav nav-items">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="aboutUs">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    My Administration
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Diseases Dataset</a>
-                    <a class="dropdown-item" href="allDiseases">All Diseases</a>
-                    <a class="dropdown-item" href="predict">Predict Disease</a>
-                  </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Account</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="logout">Logout</a>
-                  </li>
-              </ul>
-            </div>
-          </nav>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </header>
 
-    <div class="text-center text-primary mt-5 h3">
-      <h3>Please Enter Your Observed Symptoms</h3>
+  <div class="text-center text-primary mt-5 h3">
+    <h3>Please Enter Your Observed Symptoms</h3>
+  </div>
+
+  <div class="form-group container">
+    <form action='/predict1' method="post">
+      <div class="box" id="sel1">
+        <label>Symptom 1 : </label>
+        <select class="form-control" name="s1">
+          <option>Select Symptom</option>
+          {% for sym in syms %}
+          <option> {{ sym.name }} </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="container">
+        <div class="mt-4">
+          <button class="btn btn-success" type="button"><i class="fas fa-plus"></i> Add Symptom</button>
+          <button class="btn btn-primary ml-4" type="submit"><i class="fas fa-clipboard-list"></i> Predict
+            Disease</button>
+        </div>
+      </div>
+    </form>
+    <div class="container mt-5">
+      {{pred}}
     </div>
 
-    <div class="form-group container">
-      <form action='/predict1'  method="post">
-          <div class="box" id="sel1">
-            <label>Symptom 1 : </label>
-            <select class="form-control" name="s1">
-              	<option>Select Symptom</option>
-    		            {% for sym in syms %}
-    		        <option >	{{ sym.name }}  </option>
-  			            {% endfor %}
-            </select>
-          </div>
-          <div class="container">
-            <div class="mt-4">
-                <button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Add Symptom</button>
-                <button class="btn btn-primary ml-4" type="submit"><i class="fas fa-clipboard-list"></i> Predict Disease</button>
-            </div>
-        </div>
-        </form>
-        <div class="container mt-5">
-          {{pred}}
-        </div>
+    <br>
+  </div>
 
-        <br>
-      </div>
+  <script src="{{ url_for('static', filename='styles/predict.js') }}" charset="utf-8"></script>
 
-      <script src="{{ url_for('static', filename='styles/predict.js') }}" charset="utf-8"></script>
+</body>
 
-  </body>
 </html>

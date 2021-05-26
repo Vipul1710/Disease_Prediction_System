@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DPS | Home</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {{"decoupled-map"|googlemap_js(37.4419, -122.1419, markers=[(37.4419,
+    -122.1419)])}} {{mymap.js}} {{sndmap.js}}
+</head>
+
+<body>
+    <header>
+        <!-- left for logo -->
+
+        <!-- mid box for navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
+            <div class="float-left pr-name h4">
+                Diseases Prediction System
+            </div>
+            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
+                <ul class="navbar-nav nav-items">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="mapview">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUs">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                            My Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Diseases Dataset</a>
+                            <a class="dropdown-item" href="allDiseases">All Diseases</a>
+                            <a class="dropdown-item" href="predict">Predict Disease</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+    </header>
+    <h1>Flask Google Maps Example</h1>
+
+    <h2>Template function centered, no marker</h2>
+    {{googlemap("simple-map", 37.4419, -122.1419)}}
+
+    <h2>Template filter decoupled with single marker</h2>
+    {{"decoupled-map"|googlemap_html(37.4419, -122.1419)}}
+
+    <h2>Template function with multiple markers</h2>
+    {% with map=googlemap_obj("another-map", 37.4419, -122.1419,
+    markers=[(37.4419, -122.1419), (37.4300, -122.1400)]) %} {{map.html}}
+    {{map.js}} {% endwith %}
+
+    <h2>First map generated in view</h2>
+    {{mymap}}
+
+    <h2>Second map generated in view</h2>
+    <h3>Example for different icons in multiple markers with infoboxes</h3>
+    {{sndmap}}
+</body>
+
+</html>

@@ -17,3 +17,14 @@ margin-left: 49%;
 {
     height: 50%;
 }
+
+#footer {
+  background-color: #fff;
+  color: #8f8f8f;
+  padding: 3% 40% 3%;
+}
+
+.footerIcons {
+  color: #000;
+  padding: 0 4% 5%;
+}
