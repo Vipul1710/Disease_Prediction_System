@@ -42,13 +42,24 @@ class Account(db.Model):
     state = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(10), nullable=False)
 
-    def __init__(self, username=None, password=None,email=None,contact_no=None,state=None,city=None):
-        self.username = username
-        self.password = password
-        self.email=email
-        self.contact_no=contact_no
-        self.state=state
-        self.city=city
+class Doctor(db.Model):
+    __tablename__ = 'doctor'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+    contact= db.Column(db.String(10), nullable=False)
+    disease=db.Column(db.String(20), nullable=False)
+    state = db.Column(db.String(10), nullable=False)
+    city = db.Column(db.String(10), nullable=False)
+
+def __init__(self, username=None, password=None,email=None,contact_no=None,state=None,city=None):
+    self.username = username
+    self.password = password
+    self.email=email
+    self.contact_no=contact_no
+    self.state=state
+    self.city=city
 
 model=pickle.load(open('model/model.pkl','rb'))
 
@@ -92,7 +103,32 @@ def logout():
 @app.route('/register', methods =['GET', 'POST'])
 def register():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+    if request.method == 'POST' and 'disease' in request.form and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        contact = request.form['contact']
+        disease =request.form['disease']
+        state = request.form['state']
+        city = request.form['city']
+
+        details = Account(username, password, email, contact_no, state, city)
+        account = Account.query.filter_by(username=username).first()
+        if account:
+            msg = 'Account already exists !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address !'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers !'
+        elif not username or not password or not email:
+            msg = 'Please fill out the form !'
+        else:
+            db.session.add(details)
+            db.session.commit()
+            msg = 'You have successfully registered !'
+            return render_template('login.html', msg=msg)
+
+    elif request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
