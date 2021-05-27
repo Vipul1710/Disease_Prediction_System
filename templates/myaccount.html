@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>DPS | Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/myaccount.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    {{"decoupled-map"|googlemap_js(37.4419, -122.1419, markers=[(37.4419,
-    -122.1419)])}} {{mymap.js}} {{sndmap.js}}
+    <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+
     <header>
         <!-- left for logo -->
 
@@ -23,12 +24,12 @@
                 Diseases Prediction System
             </div>
             <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
-                <ul class="navbar-nav nav-items">
+                <ul class="navbar-nav ">
                     <li class="nav-item active">
                         <a class="nav-link" href="index">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="mapview">Map</a>
+                        <a class="nav-link" href="map">Map</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutUs">About Us</a>
@@ -59,25 +60,59 @@
 
 
     </header>
-    <h1>Flask Google Maps Example</h1>
+    <div class="main">
+        <div id="title">
+            USER MANAGEMENT
+        </div>
+        <p>User Personal Details</p>
+        <div id="info">
+            <div class="cont">
+                <div>
+                    Username
+                </div>
+                <div class="box">
+                    {{account.username}}
+                </div>
+            </div>
 
-    <h2>Template function centered, no marker</h2>
-    {{googlemap("simple-map", 37.4419, -122.1419)}}
+            <div class="cont">
+                <div>
+                    Email id
+                </div>
+                <div class="box">
+                    {{account.email}}
+                </div>
+            </div>
 
-    <h2>Template filter decoupled with single marker</h2>
-    {{"decoupled-map"|googlemap_html(37.4419, -122.1419)}}
+            <div class="cont">
+                <div>
+                    Mobile No
+                </div>
+                <div class="box">
+                    {{account.contact}}
+                </div>
+            </div>
 
-    <h2>Template function with multiple markers</h2>
-    {% with map=googlemap_obj("another-map", 37.4419, -122.1419,
-    markers=[(37.4419, -122.1419), (37.4300, -122.1400)]) %} {{map.html}}
-    {{map.js}} {% endwith %}
+            <div class="cont">
+                <div>
+                    State
+                </div>
+                <div class="box">
+                    {{account.state}}
+                </div>
+            </div>
 
-    <h2>First map generated in view</h2>
-    {{mymap}}
+            <div class="cont">
+                <div>
+                    City
+                </div>
+                <div class="box">
+                    {{account.city}}
+                </div>
+            </div>
 
-    <h2>Second map generated in view</h2>
-    <h3>Example for different icons in multiple markers with infoboxes</h3>
-    {{sndmap}}
+        </div>
+    </div>
 </body>
 
 </html>

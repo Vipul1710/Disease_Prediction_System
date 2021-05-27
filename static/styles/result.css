@@ -1,0 +1,38 @@
+.box{
+    margin: 21px 28px auto;
+    padding: 15px 25px;
+    display: inline-block;
+    width: 20%;
+    height: 55px;
+    text-align: center;
+    background-color: red;
+}
+
+#main{
+    margin: 80px 20px auto;
+    width: 60%;
+    border: 2px solid rgb(219, 166, 67);
+    border-radius: 5px;
+    border-top: 10px solid rgb(219, 166, 67);
+}
+
+#title{
+    text-align: center;
+    background-color: rgb(13, 27, 223);
+    color: white;
+    margin: 5px 5px;
+    padding: 5px 5px;
+}
+
+#result{
+    margin: 15px;
+    text-align: center;
+    background-color: burlywood;
+}
+
+#innerdiv{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    background-color: blue;
+}

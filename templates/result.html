@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>DPS | Home</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/result.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    {{"decoupled-map"|googlemap_js(37.4419, -122.1419, markers=[(37.4419,
-    -122.1419)])}} {{mymap.js}} {{sndmap.js}}
 </head>
 
 <body>
     <header>
-        <!-- left for logo -->
-
-        <!-- mid box for navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
             <div class="float-left pr-name h4">
                 Diseases Prediction System
@@ -56,28 +52,23 @@
                 </ul>
             </div>
         </nav>
-
-
     </header>
-    <h1>Flask Google Maps Example</h1>
-
-    <h2>Template function centered, no marker</h2>
-    {{googlemap("simple-map", 37.4419, -122.1419)}}
-
-    <h2>Template filter decoupled with single marker</h2>
-    {{"decoupled-map"|googlemap_html(37.4419, -122.1419)}}
-
-    <h2>Template function with multiple markers</h2>
-    {% with map=googlemap_obj("another-map", 37.4419, -122.1419,
-    markers=[(37.4419, -122.1419), (37.4300, -122.1400)]) %} {{map.html}}
-    {{map.js}} {% endwith %}
-
-    <h2>First map generated in view</h2>
-    {{mymap}}
-
-    <h2>Second map generated in view</h2>
-    <h3>Example for different icons in multiple markers with infoboxes</h3>
-    {{sndmap}}
+    <div id="main">
+        <div id="title">
+            Your Disease Prediction Results
+        </div>
+        <div id="result">
+            It seems like you are suffering from {{result}} disease
+        </div>
+        <div>
+                <div id="innerdiv">You have following Symptoms </div>
+                {% for sym in int_features %}
+                <div class="box">
+                    {{ sym }}
+                </div>
+                {% endfor %}            
+        </div>
+    </div>
 </body>
 
 </html>

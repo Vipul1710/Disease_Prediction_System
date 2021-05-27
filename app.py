@@ -1,7 +1,7 @@
 from flask import Flask,request, url_for, redirect, render_template,session
 from flask_sqlalchemy import SQLAlchemy
-from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
+#from flask_googlemaps import GoogleMaps
+#from flask_googlemaps import Map
 import pickle
 import numpy as np
 import os
@@ -10,7 +10,7 @@ import re
 
 
 app = Flask(__name__)
-GoogleMaps(app, key="8JZ7i18MjFuM35dJHq70n3Hx4")
+#GoogleMaps(app, key="8JZ7i18MjFuM35dJHq70n3Hx4")
 
 SESSION_TYPE = 'memcache'
 
@@ -20,6 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/diseases'
 db=SQLAlchemy(app)
 
 
+loginid=[]
 
 class Symptom(db.Model):
     __tablename__ = 'symptom'
@@ -38,12 +39,12 @@ class Account(db.Model):
     username = db.Column(db.String(50), nullable=False)
     email=db.Column(db.String(100),nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    contact_no=db.Column(db.String(10),nullable=False)
+    contact=db.Column(db.String(10),nullable=False)
     state = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(10), nullable=False)
 
 class Doctor(db.Model):
-    __tablename__ = 'doctor'
+    __tablename__ = 'docter'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
@@ -57,7 +58,16 @@ def __init__(self, username=None, password=None,email=None,contact_no=None,state
     self.username = username
     self.password = password
     self.email=email
-    self.contact_no=contact_no
+    self.contact=contact
+    self.state=state
+    self.city=city
+
+def __init__(self, username=None, password=None,email=None,contact=None,disease=None,state=None,city=None):
+    self.username = username
+    self.password = password
+    self.email=email
+    self.contact=contact
+    self.disease=disease
     self.state=state
     self.city=city
 
@@ -82,11 +92,23 @@ def login():
         #cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
         #account = cursor.fetchone()
         account=Account.query.filter_by(username=username).first()
+        doctor=Doctor.query.filter_by(username=username).first()
         print(account)
+        print(account.username)
         if account :
+            loginid.append(username)
+            loginid.append(0)
             session['loggedin'] = True
             session['id'] = account.id
             session['username'] = account.username
+            msg = 'Logged in successfully !'
+            return render_template('index.html', msg=msg)
+        elif doctor:
+            loginid.append(username)
+            loginid.append(1)
+            session['loggedin'] = True
+            session['id'] = doctor.id
+            session['username'] = doctor.username
             msg = 'Logged in successfully !'
             return render_template('index.html', msg=msg)
         else:
@@ -100,6 +122,10 @@ def logout():
     session.pop('username', None)
     return render_template('login.html')
 
+@app.route('/registerdoc')
+def registerdoc():
+    return render_template('registerdoc.html')
+
 @app.route('/register', methods =['GET', 'POST'])
 def register():
     msg = ''
@@ -112,8 +138,9 @@ def register():
         state = request.form['state']
         city = request.form['city']
 
-        details = Account(username, password, email, contact_no, state, city)
-        account = Account.query.filter_by(username=username).first()
+        details = Doctor(username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'],disease=request.form['disease'], state=request.form['state'], city=request.form['city'])
+        account = Doctor.query.filter_by(username=username).first()
+
         if account:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -132,11 +159,11 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        contact_no = request.form['contact']
+        contact= request.form['contact']
         state = request.form['state']
         city = request.form['city']
 
-        details=Account( username,password,email,contact_no,state,city)
+        details=Account( username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'], state=request.form['state'], city=request.form['city'])
         account = Account.query.filter_by(username=username).first()
         if account:
             msg = 'Account already exists !'
@@ -163,6 +190,14 @@ def index():
 def aboutUs():
     return render_template('aboutUs.html')
 
+@app.route("/myaccount")
+def myaccount():
+    if(loginid[1]==0):
+        account = Account.query.filter_by(username=loginid[0]).first()
+    else:
+        account = Doctor.query.filter_by(username=loginid[0]).first()
+    return render_template('myaccount.html',account=account)
+
 @app.route("/allDiseases")
 def allDiseases():
     dise = Diseases.query.order_by(Diseases.name).all()
@@ -187,7 +222,7 @@ def predict1():
 
     prediction=model.predict([l])
     print(prediction)
-    return render_template('predict.html',pred='Your Diseases is {}'.format(prediction[0]))
+    return render_template('result.html',result=format(prediction[0]),int_features=int_features)
 
 @app.route("/map")
 def map():
