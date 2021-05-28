@@ -6,12 +6,12 @@ h3{
 }
 
 .heading{
-  width:90%;
-  height: 30px;
-  background-color: rgb(41, 41, 83);
-  margin: auto;
-  text-align: center;
-  color: white;
+    width: 90%;
+    padding-top: 1%;
+    background-color: rgb(41, 41, 83);
+    margin: auto;
+    text-align: center;
+    color: white;
 }
 
 .box{

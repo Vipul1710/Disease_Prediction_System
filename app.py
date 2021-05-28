@@ -36,6 +36,7 @@ class Diseases(db.Model):
 class Account(db.Model):
     __tablename__ = 'account'
     id=db.Column(db.Integer,primary_key=True)
+    fullname = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(50), nullable=False)
     email=db.Column(db.String(100),nullable=False)
     password = db.Column(db.String(255), nullable=False)
@@ -46,6 +47,7 @@ class Account(db.Model):
 class Doctor(db.Model):
     __tablename__ = 'docter'
     id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(255), nullable=False)
@@ -54,7 +56,8 @@ class Doctor(db.Model):
     state = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(10), nullable=False)
 
-def __init__(self, username=None, password=None,email=None,contact_no=None,state=None,city=None):
+def __init__(self, fullname=None, username=None, password=None,email=None,contact_no=None,state=None,city=None):
+    self.fullname = fullname
     self.username = username
     self.password = password
     self.email=email
@@ -62,7 +65,8 @@ def __init__(self, username=None, password=None,email=None,contact_no=None,state
     self.state=state
     self.city=city
 
-def __init__(self, username=None, password=None,email=None,contact=None,disease=None,state=None,city=None):
+def __init__(self, fullname=None, username=None, password=None,email=None,contact=None,disease=None,state=None,city=None):
+    self.fullname = fullname
     self.username = username
     self.password = password
     self.email=email
@@ -91,11 +95,11 @@ def login():
         #cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         #cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
         #account = cursor.fetchone()
-        account=Account.query.filter_by(username=username).first()
-        doctor=Doctor.query.filter_by(username=username).first()
+        account = Account.query.filter_by(username=username).first()
+        doctor = Doctor.query.filter_by(username=username).first()
         print(account)
         print(account.username)
-        if account :
+        if account:
             loginid.append(username)
             loginid.append(0)
             session['loggedin'] = True
@@ -130,6 +134,7 @@ def registerdoc():
 def register():
     msg = ''
     if request.method == 'POST' and 'disease' in request.form and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+        fullname = request.form['fullname']
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
@@ -138,7 +143,7 @@ def register():
         state = request.form['state']
         city = request.form['city']
 
-        details = Doctor(username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'],disease=request.form['disease'], state=request.form['state'], city=request.form['city'])
+        details = Doctor(fullname = request.form['fullname'], username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'],disease=request.form['disease'], state=request.form['state'], city=request.form['city'])
         account = Doctor.query.filter_by(username=username).first()
 
         if account:
@@ -156,6 +161,7 @@ def register():
             return render_template('login.html', msg=msg)
 
     elif request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+        fullname = request.form['fullname']
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
@@ -163,7 +169,7 @@ def register():
         state = request.form['state']
         city = request.form['city']
 
-        details=Account( username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'], state=request.form['state'], city=request.form['city'])
+        details=Account(fullname=request.form['fullname'], username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'], state=request.form['state'], city=request.form['city'])
         account = Account.query.filter_by(username=username).first()
         if account:
             msg = 'Account already exists !'
@@ -192,7 +198,7 @@ def aboutUs():
 
 @app.route("/myaccount")
 def myaccount():
-    if(loginid[1]==0):
+    if loginid[1] == 0:
         account = Account.query.filter_by(username=loginid[0]).first()
     else:
         account = Doctor.query.filter_by(username=loginid[0]).first()

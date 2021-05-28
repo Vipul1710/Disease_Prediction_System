@@ -89,6 +89,15 @@
           {% endfor %}
         </select>
       </div>
+      <div class="box" >
+        <label>Symptom 4 : </label>
+        <select class="form-control" name="s4" id="sel4">
+          <option>Select Symptom</option>
+          {% for sym in syms %}
+          <option> {{ sym.name }} </option>
+          {% endfor %}
+        </select>
+      </div>
 
       <div class="new">
 

@@ -8,16 +8,17 @@
 }
 
 #title{
+    color: white;
     background-color: cadetblue;
-    width: 90%;
-    margin: 5px auto;
+    width: 95%;
+    margin: 2% auto;
+    font-size: 1.5rem
 }
 
 #info{
     
 }
 .cont{
-    /* overflow: inherit; */
     display: inline-block;
     text-align: center;
     width: 40%;
@@ -28,6 +29,6 @@
     border: 1px solid black;
     width: 60%;
     border-radius: 2px;
-    margin: 5px 5pxp auto;
+    margin: auto;
     padding: 2px 2px;
 }

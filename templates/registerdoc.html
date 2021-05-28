@@ -23,33 +23,37 @@
 		  <h2 class="form-login-heading">User Registration</h2>
 
 		        <div class="login-wrap">
+
+					<input type="text" class="form-control" placeholder="Full Name" name="fullname" required autofocus>
+
+					<br>
 					 
-					<input type="text" class="form-control" placeholder="User Name" name="username" required="required" autofocus>
+					<input type="text" class="form-control" placeholder="User Name" name="username" required>
 					
 					<br>
 					
-					<input type="email" class="form-control" placeholder="Email ID" id="email" onBlur="userAvailability()" name="email" required="required">
+					<input type="email" class="form-control" placeholder="Email ID" id="email" onBlur="userAvailability()" name="email" required>
 		             <span id="user-availability-status1" style="font-size:12px;"></span>
 					
 					 <br>
 
-					<input type="password" class="form-control" placeholder="Password" required="required" name="password">
+					<input type="password" class="form-control" placeholder="Password" name="password" minlength="8" required>
 					
 					<br>
 
-		            <input type="text" class="form-control" maxlength="10" name="contact" placeholder="Contact no" required="required">
+		            <input type="text" class="form-control" maxlength="10" name="contact" placeholder="Contact no" required>
 					
 		            <br>
                     
-                    <input type="text" class="form-control" placeholder="Specialization" required="required" name="disease">
+                    <input type="text" class="form-control" placeholder="Specialization" name="disease" required>
 
                     <br>
 
-					<input type="text" class="form-control" placeholder="State" required="required" name="state">
+					<input type="text" class="form-control" placeholder="State" name="state" required>
 
 					<br>
 
-					<input type="text" class="form-control" placeholder="City" name="city" required="required">
+					<input type="text" class="form-control" placeholder="City" name="city" required>
 		        
 		            <br>
 		            	
