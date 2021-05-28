@@ -2,7 +2,8 @@
 
 .main{
     width: 85%;
-    margin: 20px 20px auto;
+    margin: auto;
+    margin-top: 5%;
     text-align: center;
     border:2px solid black;
 }

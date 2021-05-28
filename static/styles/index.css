@@ -4,8 +4,10 @@
 
 .nav-item
 {
+    width: fit-content;
     padding: 0 5px;
 }
+
 .nav-item:hover
 {
     background-color:rgb(7, 206, 241);
@@ -15,6 +17,7 @@
 {
     margin-top: 6px;
 }
+
 .img-hight
 {
     height: 75%;

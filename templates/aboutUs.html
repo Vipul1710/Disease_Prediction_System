@@ -16,48 +16,8 @@
 </head>
 
 <body>
-  <header>
-    <!-- left for logo -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
-      <div class="float-left pr-name h3">
-        Diseases Prediction System
-      </div>
-      <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="index">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="mapview">Map</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="aboutUs">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="true">
-              My Administration
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Diseases Dataset</a>
-              <a class="dropdown-item" href="allDiseases">All Diseases</a>
-              <a class="dropdown-item" href="predict">Predict Disease</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="myaccount">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
-  </header>
+  <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
 
   <div class="h3 text-center text-primary mt-5">
     Developer's Details
@@ -101,16 +61,7 @@
     </tbody>
   </table>
 
-  <footer id="footer" class="fixed-bottom">
-
-    <a href="" title="Follow Us on Twitter"><i class="footerIcons fab fa-twitter"></i></a>
-    <a href="" title="Follow Us on Facebook"><i class="footerIcons fab fa-facebook-f"></i></a>
-    <a href="" title="Follow Us on Instagram"><i class="footerIcons fab fa-instagram"></i></a>
-    <a href="" title="Send a Mail"><i class="footerIcons fas fa-envelope"></i></a>
-
-    <p>© Copyright 2021 DPS</p>
-
-  </footer>
+  <script src="{{ url_for('static', filename='styles/footer.js') }}"></script>
 
 </body>
 

@@ -13,46 +13,9 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light  bg-light">
-            <div class="float-left pr-name h4">
-                Diseases Prediction System
-            </div>
-            <div class="collapse navbar-collapse ml-5" id="navbarNavDropdown hovers">
-                <ul class="navbar-nav nav-items">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="mapview">Map</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="aboutUs">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true">
-                            My Administration
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Diseases Dataset</a>
-                            <a class="dropdown-item" href="allDiseases">All Diseases</a>
-                            <a class="dropdown-item" href="predict">Predict Disease</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="myaccount">My Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+
+    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+
     <div id="main">
         <div id="title">
             Your Disease Prediction Results
