@@ -7,7 +7,7 @@
 	<meta name="author" content="Dashboard">
 	<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-	<title>DPS | User Login</title>
+	<title>User Login</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="static/styles/bootstrap.css" rel="stylesheet">
@@ -30,7 +30,8 @@
 				<div class="login-wrap">
 					<input type="text" class="form-control" name="username" placeholder="User ID" required autofocus>
 					<br>
-					<input type="password" class="form-control" name="password" placeholder="Password" minlength="8" required>
+					<input type="password" class="form-control" name="password" placeholder="Password" minlength="8"
+						required>
 					<label class="checkbox">
 						<span class="pull-right">
 							<a data-toggle="modal" href="login#myModal"> Forgot Password?</a>
@@ -45,13 +46,13 @@
 			<div class="registration">
 				Don't have an account yet?<br />
 				<a class="" href="{{url_for('register')}}">
-					Create an account as User 
+					Create an account as User
 				</a>
 				<br>
 				<a class="" href="{{url_for('registerdoc')}}">
-					Create an account as Doctor 
+					Create an account as Doctor
 				</a>
-				
+
 			</div>
 
 		</div>
@@ -69,13 +70,18 @@
 
 						<div class="modal-body">
 							<p>Enter your details below to reset your password.</p>
-							<input type="email" name="email" placeholder="Email" autocomplete="off" class="form-control" required><br>
+							<input type="email" name="email" placeholder="Email" autocomplete="off" class="form-control"
+								required><br>
 
-							<input type="text" name="contact" placeholder="Contact No" autocomplete="off" class="form-control" required><br>
+							<input type="text" name="contact" placeholder="Contact No" autocomplete="off"
+								class="form-control" required><br>
 
-							<input type="password" class="form-control" placeholder="New Password" id="password" name="password" minlength="8" required><br />
+							<input type="password" class="form-control" placeholder="New Password" id="password"
+								name="password" minlength="8" required><br />
 
-							<input type="password" class="form-control unicase-form-control text-input" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" minlength="8" required>
+							<input type="password" class="form-control unicase-form-control text-input"
+								placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" minlength="8"
+								required>
 						</div>
 
 						<div class="modal-footer">

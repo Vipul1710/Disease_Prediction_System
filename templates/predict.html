@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DPS | Predict Disease</title>
+  <title>Predict Disease</title>
 
 
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
@@ -16,24 +16,26 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
 
 
   <script>
-    var x=2;
+    var x = 2;
 
     function addSym() {
       $(".new").before("<div class='box' id='sel0'><label class='count'>Symptom 0 : </label><select class='chname form-control' name='s0'><option>Select Symptom</option><p>{% for sym in syms %}</p><option><p>{{ sym.name }}</p></option><p>{% endfor %}</p></div></select></div>")
       $(".count").text("Symptom " + x + " : ");
 
-      $(".count").attr("class","");
+      $(".count").attr("class", "");
 
-      y="s"+x;
-      $(".chname").attr("name",y);
+      y = "s" + x;
+      $(".chname").attr("name", y);
       $(".chname").removeClass("chname");
 
-      y="sel"+x;
-      $("#sel0").attr("id",y);
+      y = "sel" + x;
+      $("#sel0").attr("id", y);
       x++;
     }
   </script>
@@ -49,7 +51,7 @@
 
   <div class="form-group">
     <form action='/predict1' method="post">
-      <div class="box" >
+      <div class="box">
         <label>Symptom 1 : </label>
         <select class="form-control" name="s1" id="sel1">
           <option>Select Symptom</option>
@@ -64,7 +66,8 @@
       </div>
 
       <div class="btn1">
-        <button class="btn btn-success" onclick="addSym()" type="button"><i class="fas fa-plus"></i> Add Symptom</button>
+        <button class="btn btn-success" onclick="addSym()" type="button"><i class="fas fa-plus"></i> Add
+          Symptom</button>
       </div>
 
       <div class="btn2">

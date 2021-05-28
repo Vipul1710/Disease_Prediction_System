@@ -198,11 +198,14 @@ def aboutUs():
 
 @app.route("/myaccount")
 def myaccount():
-    if loginid[1] == 0:
+    type=""
+    if loginid[1]==0:
+        type="User"
         account = Account.query.filter_by(username=loginid[0]).first()
     else:
+        type = "Doctor"
         account = Doctor.query.filter_by(username=loginid[0]).first()
-    return render_template('myaccount.html',account=account)
+    return render_template('myaccount.html',account=account,type=type)
 
 @app.route("/allDiseases")
 def allDiseases():
@@ -227,8 +230,10 @@ def predict1():
     print(l)
 
     prediction=model.predict([l])
+    list = Doctor.query.filter_by(disease=prediction[0]).all()
+    print(list)
     print(prediction)
-    return render_template('result.html',result=format(prediction[0]),int_features=int_features)
+    return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list)
 
 @app.route("/map")
 def map():

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/result.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -31,6 +31,26 @@
                 </div>
                 {% endfor %}            
         </div>
+    </div>
+
+    <div class="table1">
+        <p>Doctor's Detail</p>
+        <table id="t01">
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+            {% for i in list %}
+            <tr>
+                <td>{{i.fullname}}</td>
+                <td>{{i.disease}}</td>
+                <td>{{i.state}}</td>
+                <td>{{i.city}}</td>
+            </tr>
+            {% endfor %} 
+        </table>
     </div>
 </body>
 
