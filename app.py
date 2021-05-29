@@ -55,6 +55,7 @@ class Doctor(db.Model):
     disease=db.Column(db.String(20), nullable=False)
     state = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(10), nullable=False)
+    address=db.Column(db.String(200),nullable=False)
 
 def __init__(self, fullname=None, username=None, password=None,email=None,contact_no=None,state=None,city=None):
     self.fullname = fullname
@@ -65,7 +66,7 @@ def __init__(self, fullname=None, username=None, password=None,email=None,contac
     self.state=state
     self.city=city
 
-def __init__(self, fullname=None, username=None, password=None,email=None,contact=None,disease=None,state=None,city=None):
+def __init__(self, fullname=None, username=None, password=None,email=None,contact=None,disease=None,state=None,city=None,address=None):
     self.fullname = fullname
     self.username = username
     self.password = password
@@ -74,6 +75,7 @@ def __init__(self, fullname=None, username=None, password=None,email=None,contac
     self.disease=disease
     self.state=state
     self.city=city
+    self.address=address
 
 model=pickle.load(open('model/model.pkl','rb'))
 
@@ -204,6 +206,11 @@ def myaccount():
     else:
         type = "Doctor"
         account = Doctor.query.filter_by(username=loginid[0]).first()
+    if request.method == 'POST':
+        doctor = Doctor.query.filter_by(username=loginid[0]).first()
+        address=request.form['address']
+        doctor.address = address
+        db.session.commit()
     return render_template('myaccount.html',account=account,type=type)
 
 @app.route("/allDiseases")

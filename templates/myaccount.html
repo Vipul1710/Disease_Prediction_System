@@ -76,7 +76,7 @@
                     {{account.city}}
                 </div>
             </div>
-
+            {% if {{type}}=="Doctor" %}
             <div class="cont">
                 <div>
                     Address
@@ -87,6 +87,7 @@
             </div>
             <br>
             <button class="btn btn-primary">Save</button>
+            {% endif %}
             
         </div>
     </div>
