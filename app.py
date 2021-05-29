@@ -98,7 +98,6 @@ def login():
         account = Account.query.filter_by(username=username).first()
         doctor = Doctor.query.filter_by(username=username).first()
         print(account)
-        print(account.username)
         if account:
             loginid.append(username)
             loginid.append(0)
@@ -230,7 +229,10 @@ def predict1():
     print(l)
 
     prediction=model.predict([l])
-    list = Doctor.query.filter_by(disease=prediction[0]).all()
+    account = Account.query.filter_by(username=loginid[0]).first()
+    print(account.city)
+    #list1 = Doctor.query.filter_by(disease=prediction[0] ).all()
+    list = Doctor.query.filter(Doctor.disease.like(prediction[0]),Doctor.city.like(account.city))
     print(list)
     print(prediction)
     return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list)
@@ -238,7 +240,7 @@ def predict1():
 @app.route("/map")
 def map():
     # creating a map in the view
-    mymap = Map(
+    '''mymap = Map(
         identifier="view-side",
         lat=37.4419,
         lng=-122.1419,
@@ -262,8 +264,9 @@ def map():
              'infobox': "<b>Hello World from other place</b>"
           }
         ]
-    )
-    return render_template('map.html', mymap=mymap, sndmap=sndmap)
+    )'''
+    #return render_template('map.html', mymap=mymap, sndmap=sndmap)
+    return render_template('map.html')
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
