@@ -14,8 +14,11 @@
 </head>
 
 <body>
-  <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
-
+  {% if loginid[1]==0 %}
+    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='styles/navbardoc.js') }}"></script>
+  {% endif %}
   <div class="h3 text-center text-primary mt-5">
     Developer's Details
   </div>

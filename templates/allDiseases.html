@@ -14,7 +14,11 @@
 </head>
 
 <body>
-  <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+  {% if loginid[1]==0 %}
+    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='styles/navbardoc.js') }}"></script>
+  {% endif %}  
 
   {%for di in diseases%}
   <div class="box">

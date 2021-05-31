@@ -15,8 +15,11 @@
 
 <body>
 
-    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
-
+    {% if loginid[1]==0 %}
+        <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+    {% else %}
+        <script src="{{ url_for('static', filename='styles/navbardoc.js') }}"></script>
+    {% endif %}
     <div class="main">
         <div id="title">
             ACCOUNT DETAIL'S
@@ -79,16 +82,30 @@
             {% if type=="Doctor" %}
             <div class="cont addFld">
                 <div>
-                    Address
+                    Current Address
                 </div>
+
+                <div class="box input-add">
+                    {{account.address}}
+                </div>
+                <br>
+
+
+                <!-- <div class="cont addFld"> -->
+                <div>
+                    Update Address
+                </div>
+                <!-- </div> -->
+
                 <form class="form-login" action='/myaccount' method="post">
-                    <input class="input-add" type="text">
+
+                    <input class="input-add" type="text" name="address">
                     <br>
-                    <button class="btn btn-primary"><i class="fas fa-arrow-up"></i> Update</button>
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-arrow-up"></i> Update</button>
                 </form>
             </div>
             {% endif %}
-            
+
         </div>
     </div>
 </body>

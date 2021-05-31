@@ -14,8 +14,11 @@
 
 <body>
 
-    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
-
+    {% if loginid[1]==0 %}
+        <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+    {% else %}
+        <script src="{{ url_for('static', filename='styles/navbardoc.js') }}"></script>
+    {% endif %}
     <div id="main">
         <div id="title">
             Your Disease Prediction Results
@@ -24,12 +27,12 @@
             It seems like you are suffering from <span class="disease">{{result}}</span> disease
         </div>
         <div>
-                <div id="innerdiv">You have following Symptoms </div>
-                {% for sym in int_features %}
-                <div class="box">
-                    {{ sym }}
-                </div>
-                {% endfor %}            
+            <div id="innerdiv">You have following Symptoms </div>
+            {% for sym in int_features %}
+            <div class="box">
+                {{ sym }}
+            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -49,7 +52,7 @@
                 <td>{{i.state}}</td>
                 <td>{{i.city}}</td>
             </tr>
-            {% endfor %} 
+            {% endfor %}
         </table>
     </div>
 </body>

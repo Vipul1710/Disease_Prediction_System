@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Predict Disease</title>
+      
+      
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/predict.css') }}"> -->
+      
+      
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+          crossorigin="anonymous"></script>
+      
+      
+        <script>
+          var x = 2;
+      
+          function addDis() {
+            $(".new").before("<div class='box' id='sel0'><label class='count'>Symptom 0 : </label><select class='chname form-control' name='s0'><option>Select Symptom</option><p>{% for sym in syms %}</p><option><p>{{ sym.name }}</p></option><p>{% endfor %}</p></div></select></div>")
+            $(".count").text("Symptom " + x + " : ");
+      
+            $(".count").attr("class", "");
+      
+            y = "s" + x;
+            $(".chname").attr("name", y);
+            $(".chname").removeClass("chname");
+      
+            y = "sel" + x;
+            $("#sel0").attr("id", y);
+            x++;
+          }
+        </script>
+      </head>
+      
+
+    <body>
+        <div class="new"></div>
+        <div class="form-group">
+            <form action='/predict1' method="post">
+                <div class="box">
+                    <label>Add Diseases : </label>
+                    <select class="form-control" name="s1" id="sel1">
+                        <option>Select Symptom</option>
+                        {% for sym in syms %}
+                        <option> {{ sym.name }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="btn1">
+                    <button class="btn btn-success" onclick="addDis()" type="button"><i class="fas fa-plus"></i> Add
+                        Disease</button>
+                </div>
+
+            </form>
+    </body>
+
+</html>

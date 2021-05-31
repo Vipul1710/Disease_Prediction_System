@@ -104,7 +104,7 @@ def login():
             session['id'] = account.id
             session['username'] = account.username
             msg = 'Logged in successfully !'
-            return render_template('index.html', msg=msg)
+            return render_template('index.html', msg=msg,loginid=loginid)
         elif doctor:
             loginid.append(username)
             loginid.append(1)
@@ -112,13 +112,14 @@ def login():
             session['id'] = doctor.id
             session['username'] = doctor.username
             msg = 'Logged in successfully !'
-            return render_template('index.html', msg=msg)
+            return render_template('index.html', msg=msg ,loginid=loginid)
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
 
 @app.route('/logout')
 def logout():
+    loginid.clear()
     while(session):
         session.pop('loggedin', None)
         session.pop('id', None)
@@ -189,37 +190,56 @@ def register():
 
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    return render_template('index.html',loginid=loginid)
 
 @app.route("/aboutUs")
 def aboutUs():
-    return render_template('aboutUs.html')
+    return render_template('aboutUs.html',loginid=loginid)
 
-@app.route("/myaccount")
+@app.route("/addressupdate",methods=['POST','GET'])
+def addressupdate():
+    if request.method == 'POST':
+        doctor = Doctor.query.filter_by(username=loginid[0]).first()
+        address=request.form['address']
+        print(address)
+        doctor.address = address
+        db.session.commit()
+    return render_template('myaccount.html',loginid=loginid)
+
+@app.route("/myaccount",methods=['POST','GET'])
 def myaccount():
     type=""
+    print(loginid[0])
+    if request.method == 'POST':
+        doctor = Doctor.query.filter_by(username=loginid[0]).first()
+        address=request.form['address']
+        print(address)
+        doctor.address = address
+        db.session.commit()
     if loginid[1]==0:
         type="User"
         account = Account.query.filter_by(username=loginid[0]).first()
     else:
         type = "Doctor"
         account = Doctor.query.filter_by(username=loginid[0]).first()
-    if request.method == 'POST':
-        doctor = Doctor.query.filter_by(username=loginid[0]).first()
-        address=request.form['address']
-        doctor.address = address
-        db.session.commit()
-    return render_template('myaccount.html',account=account,type=type)
+    return render_template('myaccount.html',account=account,type=type,loginid=loginid)
+
+
+
+@app.route("/addDiseases")
+def addDiseases():
+    dise = Diseases.query.order_by(Diseases.name).all()
+    return render_template('addDiseases.html',diseases=dise,loginid=loginid)
 
 @app.route("/allDiseases")
 def allDiseases():
     dise = Diseases.query.order_by(Diseases.name).all()
-    return render_template('allDiseases.html',diseases=dise)
+    return render_template('allDiseases.html',diseases=dise,loginid=loginid)
 
 @app.route("/predict")
 def predict():
     syms = Symptom.query.order_by(Symptom.name).all()
-    return render_template('predict.html',syms=syms)
+    return render_template('predict.html',syms=syms,loginid=loginid)
 
 
 @app.route('/predict1',methods=['POST','GET'])
@@ -236,8 +256,8 @@ def predict1():
     prediction=model.predict([l])
     account = Account.query.filter_by(username=loginid[0]).first()
     list = Doctor.query.filter(Doctor.disease.like(prediction[0]),Doctor.city.like(account.city)).all()
-  
-    return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list)
+
+    return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list,loginid=loginid)
 
 @app.route("/map")
 def map():
@@ -268,7 +288,7 @@ def map():
         ]
     )'''
     #return render_template('map.html', mymap=mymap, sndmap=sndmap)
-    return render_template('map.html')
+    return render_template('map.html',loginid=loginid)
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

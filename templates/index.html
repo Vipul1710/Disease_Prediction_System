@@ -13,11 +13,18 @@
   <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="{{url_for('static',filename='styles/index.css')}}">
+
+  
+
 </head>
 
 <body>
 
-  <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+  {% if loginid[1]==0 %}
+    <script src="{{ url_for('static', filename='styles/navbar.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='styles/navbardoc.js') }}"></script>
+  {% endif %}  
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover">
     <ol class="carousel-indicators">
@@ -66,11 +73,18 @@
 
   <script src="{{ url_for('static', filename='styles/footer.js') }}"></script>
 
+  <script>
+    $('.carousel').carousel({
+      interval: 2000
+    })
+    // console.log({{ loginid[1] }});
+    // if({{loginid[1]}}==1)
+    // {
+    //   $(".prdct").attr("hidden","hidden")
+    // }
+  </script>
+
 </body>
-<script>
-  $('.carousel').carousel({
-    interval: 2000
-  })
-</script>
+
 
 </html>
