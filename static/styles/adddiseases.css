@@ -1,0 +1,56 @@
+.box{
+    margin: 21px 28px auto;
+    padding: 15px 25px;
+    display: inline-block;
+    width: 20%;
+    height: 55px;
+    text-align: center;
+    background-color: yellow;
+}
+
+h3{
+    text-align: center;
+    background-color: rgb(41, 41, 83);
+    color: white;
+    height: 50px;
+  }
+  
+  .heading{
+      width: 90%;
+      padding-top: 1%;
+      background-color: rgb(41, 41, 83);
+      margin: auto;
+      text-align: center;
+      color: white;
+  }
+  
+  .box1{
+    margin: 20px auto;
+    font-size: 20px;
+    width: 20%;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .form-group{
+    width: 100%;
+    margin: 50px auto;
+  }
+  
+  .ans{
+    width: 60%;
+    margin: 10px auto;
+    text-align: center;
+  }
+  
+  .btn1{
+    width: 11%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  
+  .btn2{
+    width: 11%;
+    margin: auto;
+  }
+  

@@ -46,16 +46,27 @@ class Account(db.Model):
 
 class Doctor(db.Model):
     __tablename__ = 'docter'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, nullable=False)
     fullname = db.Column(db.String(50), nullable=False)
-    username = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(50), nullable=False,primary_key=True)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     contact= db.Column(db.String(10), nullable=False)
     disease=db.Column(db.String(20), nullable=False)
     state = db.Column(db.String(10), nullable=False)
     city = db.Column(db.String(10), nullable=False)
-    address=db.Column(db.String(200),nullable=False)
+    address=db.Column(db.String(200))
+
+class AddDiseases(db.Model):
+    __tablename__ = 'docdiseases'
+    id = db.Column(db.Integer, nullable=False,primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    disease = db.Column(db.String(20), nullable=False)
+
+def __init__(self,username=None,disease=None):
+    self.username = username
+    self.disease = disease
+
 
 def __init__(self, fullname=None, username=None, password=None,email=None,contact_no=None,state=None,city=None):
     self.fullname = fullname
@@ -146,6 +157,8 @@ def register():
         details = Doctor(fullname = request.form['fullname'], username=request.form['username'], email=request.form['email'], password=request.form['password'], contact=request.form['contact'],disease=request.form['disease'], state=request.form['state'], city=request.form['city'])
         account = Doctor.query.filter_by(username=username).first()
 
+        newdise=AddDiseases(username=request.form['username'],disease=request.form['disease'])
+
         if account:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -156,6 +169,7 @@ def register():
             msg = 'Please fill out the form !'
         else:
             db.session.add(details)
+            db.session.add(newdise)
             db.session.commit()
             msg = 'You have successfully registered !'
             return render_template('login.html', msg=msg)
@@ -226,10 +240,16 @@ def myaccount():
 
 
 
-@app.route("/addDiseases")
+@app.route("/addDiseases",methods=['POST', 'GET'])
 def addDiseases():
     dise = Diseases.query.order_by(Diseases.name).all()
-    return render_template('addDiseases.html',diseases=dise,loginid=loginid)
+    if request.method == 'POST':
+        address = request.form['disease']
+        newdise = AddDiseases(username=loginid[0], disease=request.form['disease'])
+        db.session.add(newdise)
+        db.session.commit()
+    alldise = AddDiseases.query.filter_by(username=loginid[0]).all()
+    return render_template('addDiseases.html',dise=dise,loginid=loginid,alldise=alldise)
 
 @app.route("/allDiseases")
 def allDiseases():
@@ -255,9 +275,21 @@ def predict1():
 
     prediction=model.predict([l])
     account = Account.query.filter_by(username=loginid[0]).first()
-    list = Doctor.query.filter(Doctor.disease.like(prediction[0]),Doctor.city.like(account.city)).all()
-
-    return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list,loginid=loginid)
+    doc=AddDiseases.query.filter_by(disease=prediction[0]).all()
+    list = Doctor.query.filter_by(city=account.city).all()
+    final=[]
+    temp=[]
+    for i in list:
+        temp=[]
+        for j in doc:
+            if i.username==j.username:
+                temp.append(i.fullname)
+                temp.append(prediction[0])
+                temp.append(i.state)
+                temp.append(i.city)
+        if(len(temp)!=0):
+            final.append(temp)
+    return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=final,loginid=loginid)
 
 @app.route("/map")
 def map():
