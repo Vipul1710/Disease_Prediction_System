@@ -77,16 +77,16 @@
                 </div>
             </div>
             {% if type=="Doctor" %}
-            <div class="cont">
+            <div class="cont addFld">
                 <div>
                     Address
                 </div>
-                <div class="box">
-                    <input type="text">
-                </div>
+                <form class="form-login" action='/myaccount' method="post">
+                    <input class="input-add" type="text">
+                    <br>
+                    <button class="btn btn-primary"><i class="fas fa-arrow-up"></i> Update</button>
+                </form>
             </div>
-            <br>
-            <button class="btn btn-primary">Save</button>
             {% endif %}
             
         </div>
