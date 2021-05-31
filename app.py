@@ -94,12 +94,9 @@ def login():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        #cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        #cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
-        #account = cursor.fetchone()
         account = Account.query.filter_by(username=username).first()
         doctor = Doctor.query.filter_by(username=username).first()
-        print(account)
+
         if account:
             loginid.append(username)
             loginid.append(0)
@@ -122,9 +119,10 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('loggedin', None)
-    session.pop('id', None)
-    session.pop('username', None)
+    while(session):
+        session.pop('loggedin', None)
+        session.pop('id', None)
+        session.pop('username', None)
     return render_template('login.html')
 
 @app.route('/registerdoc')
@@ -237,11 +235,8 @@ def predict1():
 
     prediction=model.predict([l])
     account = Account.query.filter_by(username=loginid[0]).first()
-    print(account.city)
-    #list1 = Doctor.query.filter_by(disease=prediction[0] ).all()
-    list = Doctor.query.filter(Doctor.disease.like(prediction[0]),Doctor.city.like(account.city))
-    print(list)
-    print(prediction)
+    list = Doctor.query.filter(Doctor.disease.like(prediction[0]),Doctor.city.like(account.city)).all()
+  
     return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=list)
 
 @app.route("/map")
