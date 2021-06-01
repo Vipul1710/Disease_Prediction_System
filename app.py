@@ -287,6 +287,8 @@ def predict1():
                 temp.append(prediction[0])
                 temp.append(i.state)
                 temp.append(i.city)
+                temp.append(i.address)
+                
         if(len(temp)!=0):
             final.append(temp)
     return render_template('result.html',result=format(prediction[0]),int_features=int_features,list=final,loginid=loginid)
