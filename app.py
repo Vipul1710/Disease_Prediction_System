@@ -46,9 +46,9 @@ class Account(db.Model):
 
 class Doctor(db.Model):
     __tablename__ = 'docter'
-    id = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, nullable=False,primary_key=True)
     fullname = db.Column(db.String(50), nullable=False)
-    username = db.Column(db.String(50), nullable=False,primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     contact= db.Column(db.String(10), nullable=False)
@@ -102,12 +102,29 @@ def loginpage():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+    if request.method == 'POST' and 'username' in request.form and 'email' in request.form:
+        username = request.form['username']
+        email = request.form['email']
+        account = Account.query.filter(Account.username.like(username), Account.email.like(email)).first()
+        doctor = Doctor.query.filter(Doctor.username.like(username), Doctor.email.like(email)).first()
+
+        if account:
+            newpassword = request.form['newpassword']
+            account.password = newpassword
+            db.session.commit()
+        elif doctor:
+            newpassword = request.form['newpassword']
+            doctor.password = newpassword
+            db.session.commit()
+        else:
+            msg = 'Incorrect username / email !'
+
+
+    elif request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         account = Account.query.filter(Account.username.like(username), Account.password.like(password)).first()
-        doctor = Doctor.query.filter_by(username=username).first()
-        # doctor = Doctor.query.filter(Doctor.username.like(username), Doctor.password.like(password)).first()
+        doctor = Doctor.query.filter(Doctor.username.like(username), Doctor.password.like(password)).first()
 
         if account:
             loginid.append(username)

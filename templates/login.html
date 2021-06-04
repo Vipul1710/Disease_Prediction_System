@@ -35,6 +35,7 @@
 					<label class="checkbox">
 						<span class="pull-right">
 							<a data-toggle="modal" href="login#myModal"> Forgot Password?</a>
+							<!-- <a data-toggle="modal" href="forgot"> Forgot Password?</a> -->
 
 						</span>
 					</label>
@@ -42,7 +43,7 @@
 						IN</button>
 					<hr>
 			</form>
-
+			
 			<p class="msg1">
 				{{ msg }}
 			</p>
@@ -61,7 +62,7 @@
 		</div>
 
 		<!-- Modal -->
-		<form class="form-login" name="forgot" method="post">
+		<form class="form-login" action="{{ url_for('login') }}" name="forgot" method="post">
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
 				class="modal fade">
 				<div class="modal-dialog">
@@ -83,7 +84,7 @@
 								name="password" minlength="8" required><br />
 
 							<input type="password" class="form-control unicase-form-control text-input"
-								placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" minlength="8"
+								placeholder="Confirm Password" id="confirmpassword" name="newpassword" minlength="8"
 								required>
 						</div>
 
