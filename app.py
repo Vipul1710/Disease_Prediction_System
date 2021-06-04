@@ -105,8 +105,9 @@ def login():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        account = Account.query.filter_by(username=username).first()
+        account = Account.query.filter(Account.username.like(username), Account.password.like(password)).first()
         doctor = Doctor.query.filter_by(username=username).first()
+        # doctor = Doctor.query.filter(Doctor.username.like(username), Doctor.password.like(password)).first()
 
         if account:
             loginid.append(username)

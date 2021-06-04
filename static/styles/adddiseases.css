@@ -5,7 +5,9 @@
     width: 20%;
     height: 55px;
     text-align: center;
-    background-color: yellow;
+    background-color: #bbbbbb;
+    border-style: solid;
+    border-width: 3px;
 }
 
 h3{
@@ -44,13 +46,12 @@ h3{
   }
   
   .btn1{
-    width: 11%;
+    width: 15%;
     margin: auto;
     margin-bottom: 30px;
   }
-  
+
   .btn2{
-    width: 11%;
+    width: 15%;
     margin: auto;
   }
-  

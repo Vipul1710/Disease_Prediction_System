@@ -12,28 +12,24 @@
       
       
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/3d6055a11a.js" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-    crossorigin="anonymous"></script>
-      
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
       
         <script>
           
-           var x=1; 
+          var x=1;
 
           function addDis() {
               while(x==1){
             $(".new").before('{% for dis1 in alldise %}<div class="box">{{ dis1.disease }}</div>{% endfor %}')
                 x=x+1;
-        }
+            }
         }
         </script>
       </head>
-      
 
     <body>
         {% if loginid[1]==0 %}
@@ -57,13 +53,11 @@
 
 
                 <div class="btn1">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i> Add
-                        Disease</button>
+                    <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i> &nbsp Add My Specialisation</button>
                 </div>
 
                 <div class="btn2">
-                    <button class="btn btn-success" onclick="addDis()" type="button"><i class="fas fa-plus"></i> Show
-                        Disease</button>
+                    <button class="btn btn-success" onclick="addDis()" type="button">Show My Specialisations <i class="fas fa-clipboard-list"></i></button>
                 </div>
 
             </form>
