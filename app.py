@@ -228,16 +228,6 @@ def index():
 def aboutUs():
     return render_template('aboutUs.html',loginid=loginid)
 
-@app.route("/addressupdate",methods=['POST','GET'])
-def addressupdate():
-    if request.method == 'POST':
-        doctor = Doctor.query.filter_by(username=loginid[0]).first()
-        address=request.form['address']
-        print(address)
-        doctor.address = address
-        db.session.commit()
-    return render_template('myaccount.html',loginid=loginid)
-
 @app.route("/myaccount",methods=['POST','GET'])
 def myaccount():
     type=""
